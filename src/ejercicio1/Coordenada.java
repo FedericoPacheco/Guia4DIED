@@ -25,21 +25,13 @@ public class Coordenada
 	
 	public String toString()
 	{
-		return "[lat.: " + latitud + "; long.: " + longitud + "]";
+		return "[lat.: " + latitud + "°; long.: " + longitud + "°]";
 	}
 	
-	/*
 	public Double getLatitud() {
 		return latitud;
-	}
-	public void setLatitud(Double latitud) {
-		this.latitud = latitud;
 	}
 	public Double getLongitud() {
 		return longitud;
 	}
-	public void setLongitud(Double longitud) {
-		this.longitud = longitud;
-	}
-	*/
 }

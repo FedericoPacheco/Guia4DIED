@@ -70,4 +70,15 @@ public class Camino
 		
 		return this.buscar(noroeste, sureste);
 	}
+	
+	public void imprimir()
+	{
+		this.imprimir(coordenadas);
+	}
+	
+	static public void imprimir(ArrayList<Coordenada> l)
+	{
+		for (Coordenada c: l)
+			System.out.println(c.toString());
+	}
 }

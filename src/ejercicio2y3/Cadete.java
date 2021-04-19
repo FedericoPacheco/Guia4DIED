@@ -38,9 +38,14 @@ public class Cadete
 		pedidosALlevar.add(pedido);
 	}
 	
-	public Double comisiones() // total a cobrar
+	public Double getMontoTotalACobrar()
 	{
+		Double suma = 0.0;
 		
+		for(Pedido p: pedidosALlevar)
+			suma += p.precioEnvio() * p.getComisionCadete() + p.getMontoAdicionalCadete();
+		
+		return suma;
 	}
 }
 

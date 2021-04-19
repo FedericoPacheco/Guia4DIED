@@ -1,5 +1,6 @@
 package ejercicio2y3;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public abstract class Pedido 
@@ -9,7 +10,8 @@ public abstract class Pedido
 	protected Integer id;
 	protected ArrayList<Producto> productos;
 	protected Cadete cadeteAsignado;
-
+	protected LocalDateTime fechaEntrega;
+	
 	public Pedido()
 	{
 		id = contadorId;
@@ -27,18 +29,21 @@ public abstract class Pedido
 		contadorId++;
 	}
 	
-	public setCadeteAsignado(Cadete cadete)
+	public void setCadeteAsignado(Cadete cadete)
 	{
 		this.cadeteAsignado = cadete;
 	}
 	
-	public abstract Boolean agregarProducto(Producto unProducto);
+	public abstract Boolean agregarProducto(Producto producto);
+	
+	// Se intepreta la comision como un porcentaje:
+	public abstract Double getComisionEnvio();  
+	public abstract Double getComisionCadete();
+	public abstract Double getMontoAdicionalCadete();
 
-	public abstract Double getComision();
-
-	public Double precio()
+	public Double precioEnvio()
 	{
-		return this.precioTotalSinComisiones() * (1 + this.getComision());
+		return this.precioTotalSinComisiones() * (1 + this.getComisionEnvio());
 	}
 	
 	private Double precioTotalSinComisiones()
@@ -48,6 +53,23 @@ public abstract class Pedido
 			suma += p.getPrecio();
 		
 		return suma;
+	}
+	
+	public Integer fueEntregado()
+	{
+		Integer auxInteger;
+		
+		if (fechaEntrega == null)
+			auxInteger = 0;
+		else
+			auxInteger = 1;
+		
+		return auxInteger;
+	}
+	
+	public void registrarEntrega()
+	{
+		fechaEntrega = LocalDateTime.now();
 	}
 }
 

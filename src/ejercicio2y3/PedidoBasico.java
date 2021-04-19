@@ -27,13 +27,13 @@ public class PedidoBasico extends Pedido
 		this.esExpress = true;
 	}
 	
-	public Boolean agregarProducto(Producto unProducto)
+	public Boolean agregarProducto(Producto producto)
 	{
 		Boolean auxBoolean;
 		
 		if (productos.size() < cantidadMaximaProductos)
 		{
-			productos.add(unProducto);
+			productos.add(producto);
 			auxBoolean = true;
 		}
 		else
@@ -42,7 +42,7 @@ public class PedidoBasico extends Pedido
 		return auxBoolean;
 	}
 	
-	public Double getComision()
+	public Double getComisionEnvio()
 	{
 		Double auxDouble;
 		
@@ -52,5 +52,15 @@ public class PedidoBasico extends Pedido
 			auxDouble = recargoEstandar;
 		
 		return auxDouble;
+	}
+	
+	public Double getComisionCadete()
+	{
+		return this.fueEntregado() * Cadete.cobroPedidoBasico;
+	}
+	
+	public Double getMontoAdicionalCadete()
+	{
+		return 0.0;
 	}
 }

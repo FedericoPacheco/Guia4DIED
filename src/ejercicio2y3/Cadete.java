@@ -1,5 +1,7 @@
 package ejercicio2y3;
 
+import java.util.ArrayList;
+
 public class Cadete 
 {
 	static Integer contadorId = 0;
@@ -11,5 +13,35 @@ public class Cadete
 	
 	private Integer id;
 	private String nombre;
+	private ArrayList <Pedido> pedidosALlevar;
 	
+	public Cadete()
+	{
+		id = contadorId;
+		pedidosALlevar = new ArrayList<Pedido>();
+		
+		contadorId++;
+	}
+	
+	public Cadete(String nombre)
+	{
+		id = contadorId;
+		this.nombre = nombre;
+		pedidosALlevar = new ArrayList<Pedido>();
+		
+		contadorId++;
+	}
+	
+	public void agregarPedido(Pedido pedido)
+	{
+		pedido.setCadeteAsignado(this);
+		pedidosALlevar.add(pedido);
+	}
+	
+	public Double comisiones() // total a cobrar
+	{
+		
+	}
 }
+
+

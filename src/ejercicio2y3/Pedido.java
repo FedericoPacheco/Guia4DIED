@@ -6,15 +6,48 @@ public abstract class Pedido
 {	
 	static Integer contadorId = 0;
 	
+	protected Integer id;
 	protected ArrayList<Producto> productos;
 	protected Cadete cadeteAsignado;
 
-	Pedido()
+	public Pedido()
 	{
+		id = contadorId;
 		productos = new ArrayList<Producto>();
-		cadeteAsignado = new Cadete();
+		
+		contadorId++;
+	}
+	
+	public Pedido(ArrayList<Producto> productos, Cadete cadeteAsignado)
+	{
+		id = contadorId;
+		this.productos = productos;
+		this.cadeteAsignado = cadeteAsignado;
+		
+		contadorId++;
+	}
+	
+	public setCadeteAsignado(Cadete cadete)
+	{
+		this.cadeteAsignado = cadete;
 	}
 	
 	public abstract Boolean agregarProducto(Producto unProducto);
+
+	public abstract Double getComision();
+
+	public Double precio()
+	{
+		return this.precioTotalSinComisiones() * (1 + this.getComision());
+	}
+	
+	private Double precioTotalSinComisiones()
+	{
+		Double suma = 0.0;
+		for (Producto p: productos)
+			suma += p.getPrecio();
+		
+		return suma;
+	}
 }
 

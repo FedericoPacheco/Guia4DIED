@@ -1,5 +1,7 @@
 package ejercicio2y3;
 
+import java.util.ArrayList;
+
 public class PedidoBasico extends Pedido 
 {
 	private static final Double recargoEstandar = 0.05;
@@ -8,6 +10,18 @@ public class PedidoBasico extends Pedido
 	
 	private Boolean esExpress;
 
+	public PedidoBasico()
+	{
+		super();
+		esExpress = false;
+	}
+	
+	public PedidoBasico(ArrayList<Producto> productos, Cadete cadeteAsignado)
+	{
+		super(productos, cadeteAsignado);
+		esExpress = false;
+	}
+	
 	public void esExpress()
 	{
 		this.esExpress = true;
@@ -26,5 +40,17 @@ public class PedidoBasico extends Pedido
 			auxBoolean = false;
 		
 		return auxBoolean;
+	}
+	
+	public Double getComision()
+	{
+		Double auxDouble;
+		
+		if (esExpress)
+			auxDouble = recargoExpress;
+		else
+			auxDouble = recargoEstandar;
+		
+		return auxDouble;
 	}
 }

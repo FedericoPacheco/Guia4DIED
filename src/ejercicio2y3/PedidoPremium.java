@@ -7,13 +7,13 @@ public class PedidoPremium extends Pedido
 	private static final Double recargoMaximo = 0.3;
 	private static final Integer cantidadProductosRecargoMaximo = 20;
 	
-	public Boolean agregarProducto(Producto unProducto)
+	public Boolean agregarProducto(Producto producto)
 	{
 		Boolean auxBoolean;
 		
 		if (productos.size() < cantidadProductosRecargoMaximo)
 		{
-			productos.add(unProducto);
+			productos.add(producto);
 			auxBoolean = true;
 		}
 		else

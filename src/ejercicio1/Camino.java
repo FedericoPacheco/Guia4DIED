@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Camino 
 {
-	static final Double radioTierraEnMetros = 6378000.0;
+	private static final Double radioTierraEnMetros = 6378000.0;
 	
 	ArrayList <Coordenada> coordenadas;
 	

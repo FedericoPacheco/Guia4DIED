@@ -25,16 +25,49 @@ public class Camino
 	
 	public void agregar(Integer desplazamientoLatitud, Integer desplazamientoLongitud)
 	{
-		Coordenada ultimaCoordenada = coordenadas.get(coordenadas.size() - 1);
+		this.agregar (coordenadaDesplazada(coordenadas.get(coordenadas.size() - 1), desplazamientoLatitud, desplazamientoLongitud));
+	}
+	
+	private Coordenada coordenadaDesplazada(Coordenada coordenada, Integer desplazamientoLatitud, Integer desplazamientoLongitud)
+	{
+		// Aproximacion:
 		Double aux = Math.PI / 180 * radioTierraEnMetros;
 		aux = 1 / aux;
 		
-		this.agregar
-		(
-			ultimaCoordenada.getLatitud() + desplazamientoLatitud * aux,
-			ultimaCoordenada.getLongitud() + desplazamientoLongitud * aux / Math.cos(ultimaCoordenada.getLatitud() * Math.PI / 180)
-		);
+		return 
+				new Coordenada
+				(
+						coordenada.getLatitud() + desplazamientoLatitud * aux,
+						coordenada.getLongitud() + desplazamientoLongitud * aux / Math.cos(coordenada.getLatitud() * Math.PI / 180)
+				);
+	}
+	
+	public ArrayList<Coordenada> buscar(Coordenada noroeste, Coordenada sureste)
+	{	
+		ArrayList<Coordenada> auxArrayList = new ArrayList<Coordenada>();
+		Double latitudNoroste = noroeste.getLatitud();
+		Double longitudNoroste = noroeste.getLongitud();
+		Double latitudSureste = sureste.getLatitud();
+		Double longitudSureste = sureste.getLongitud();
 		
+		for (Coordenada c: coordenadas)
+			if 
+			(
+					c.getLatitud() < latitudNoroste   &&
+					c.getLatitud() > latitudSureste   &&
+					c.getLongitud() > longitudNoroste &&
+					c.getLongitud() < longitudSureste
+			)
+				auxArrayList.add(c);
 		
+		return auxArrayList;
+	}
+	
+	public ArrayList<Coordenada> buscar(Coordenada centro, Integer radio)
+	{	
+		Coordenada noroeste = coordenadaDesplazada(centro, radio, (-1) * radio);
+		Coordenada sureste = coordenadaDesplazada(centro, (-1) * radio, radio);
+		
+		return this.buscar(noroeste, sureste);
 	}
 }

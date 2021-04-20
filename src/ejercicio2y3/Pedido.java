@@ -3,14 +3,14 @@ package ejercicio2y3;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public abstract class Pedido 
+public abstract class Pedido implements Comisionable
 {	
 	static Integer contadorId = 0;
 	
 	protected Integer id;
 	protected ArrayList<Producto> productos;
 	protected Cadete cadeteAsignado;
-	protected LocalDateTime fechaEntrega;
+	protected LocalDateTime fechaHoraEnvioCompletado;
 	
 	public Pedido()
 	{
@@ -37,13 +37,13 @@ public abstract class Pedido
 	public abstract Boolean agregarProducto(Producto producto);
 	
 	// Se intepreta la comision como un porcentaje:
-	public abstract Double getComisionEnvio();  
+	public abstract Double getComisionServicio();  // Comision del envio.
 	public abstract Double getComisionCadete();
 	public abstract Double getMontoAdicionalCadete();
 
-	public Double precioEnvio()
+	public Double getPrecioServicio()
 	{
-		return this.precioTotalSinComisiones() * (1 + this.getComisionEnvio());
+		return this.precioTotalSinComisiones() * (1 + this.getComisionServicio());
 	}
 	
 	private Double precioTotalSinComisiones()
@@ -55,11 +55,11 @@ public abstract class Pedido
 		return suma;
 	}
 	
-	public Integer fueEntregado()
+	public Integer fueCompletado()
 	{
 		Integer auxInteger;
 		
-		if (fechaEntrega == null)
+		if (fechaHoraEnvioCompletado == null)
 			auxInteger = 0;
 		else
 			auxInteger = 1;
@@ -67,9 +67,9 @@ public abstract class Pedido
 		return auxInteger;
 	}
 	
-	public void registrarEntrega()
+	public void registrarServicioCompletado()
 	{
-		fechaEntrega = LocalDateTime.now();
+		fechaHoraEnvioCompletado = LocalDateTime.now();
 	}
 }
 

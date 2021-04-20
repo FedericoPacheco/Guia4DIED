@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class PedidoBasico extends Pedido 
 {
+	private static final Double montoAdicional = 0.0;
 	private static final Double recargoEstandar = 0.05;
 	private static final Double recargoExpress = 0.2;
 	private static final Integer cantidadMaximaProductos = 5;
@@ -42,7 +43,7 @@ public class PedidoBasico extends Pedido
 		return auxBoolean;
 	}
 	
-	public Double getComisionEnvio()
+	public Double getComisionServicio()
 	{
 		Double auxDouble;
 		
@@ -56,11 +57,16 @@ public class PedidoBasico extends Pedido
 	
 	public Double getComisionCadete()
 	{
-		return this.fueEntregado() * Cadete.cobroPedidoBasico;
+		return this.fueCompletado() * Cadete.recargoPedidoBasico;
 	}
 	
 	public Double getMontoAdicionalCadete()
 	{
 		return 0.0;
+	}
+
+	public Double getMontoAdicionalServicio() 
+	{
+		return this.fueCompletado() * montoAdicional;
 	}
 }

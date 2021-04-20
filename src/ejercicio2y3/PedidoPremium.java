@@ -2,6 +2,7 @@ package ejercicio2y3;
 
 public class PedidoPremium extends Pedido
 {
+	private static final Double montoAdicional = 0.0;
 	private static final Double recargoMinimo = 0.2;
 	private static final Integer cantidadProductosRecargoMinimo = 5;
 	private static final Double recargoMaximo = 0.3;
@@ -22,7 +23,7 @@ public class PedidoPremium extends Pedido
 		return auxBoolean;
 	}
 	
-	public Double getComisionEnvio()
+	public Double getComisionServicio()
 	{
 		Double auxDouble;
 		
@@ -36,7 +37,7 @@ public class PedidoPremium extends Pedido
 	
 	public Double getComisionCadete()
 	{
-		return this.fueEntregado() * Cadete.cobroPedidoPremium;
+		return this.fueCompletado() * Cadete.recargoPedidoPremium;
 	}
 	
 	public Double getMontoAdicionalCadete()
@@ -46,8 +47,13 @@ public class PedidoPremium extends Pedido
 		if (productos.size() < Cadete.cantidadProductosEnPedidoPremiumParaCobrarEfectivoExtra)
 			auxDouble = 0.0;
 		else
-			auxDouble = Cadete.efectivoExtraEnPedidoPremium;
+			auxDouble = Cadete.montoAdicionalEnPedidoPremium;
 		
-		return this.fueEntregado() * auxDouble;
+		return this.fueCompletado() * auxDouble;
+	}
+	
+	public Double getMontoAdicionalServicio()
+	{
+		return this.fueCompletado() * montoAdicional;
 	}
 }

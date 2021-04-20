@@ -36,7 +36,6 @@ public abstract class Pedido implements Comisionable
 	
 	public abstract Boolean agregarProducto(Producto producto);
 	
-	// Se intepreta la comision como un porcentaje:
 	public abstract Double getComisionServicio();  // Comision del envio.
 	public abstract Double getComisionCadete();
 	public abstract Double getMontoAdicionalCadete();
